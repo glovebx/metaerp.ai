@@ -111,10 +111,11 @@ export function BlogPostPage({
                     })?.format('YYYY/MM/DD')}
                   </span>
                 </time>
+                {post.categories ? (                
                 <span className="inline-flex items-center space-x-1.5">
                   <ScriptIcon />
                   <span>{post.categories.join(', ')}</span>
-                </span>
+                </span>) : null}
               </motion.div>
               <motion.h1
                 className="mt-6 w-full text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl"
