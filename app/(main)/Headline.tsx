@@ -3,8 +3,9 @@
 import { motion } from 'framer-motion'
 import Balancer from 'react-wrap-balancer'
 
-import { SparkleIcon, UserSecurityIcon } from '~/assets'
-import { PeekabooLink } from '~/components/links/PeekabooLink'
+// import { SparkleIcon, UserSecurityIcon } from '~/assets'
+import { SparkleIcon } from '~/assets'
+// import { PeekabooLink } from '~/components/links/PeekabooLink'
 import { SocialLink } from '~/components/links/SocialLink'
 
 function Developer() {
@@ -35,14 +36,14 @@ function Designer() {
   )
 }
 
-function OCD() {
-  return (
-    <span className="group">
-      {/* <SparkleIcon className="mr-1 inline-flex transform-gpu transition-transform duration-500 group-hover:rotate-180" /> */}
-      <span>严肃、活泼、认真</span>
-    </span>
-  )
-}
+// function OCD() {
+//   return (
+//     <span className="group">
+//       {/* <SparkleIcon className="mr-1 inline-flex transform-gpu transition-transform duration-500 group-hover:rotate-180" /> */}
+//       <span>严肃、活泼、认真</span>
+//     </span>
+//   )
+// }
 
 function Founder() {
   return (
