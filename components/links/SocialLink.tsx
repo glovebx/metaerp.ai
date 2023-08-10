@@ -13,6 +13,7 @@ import {
   TelegramIcon,
   TwitterIcon,
   YouTubeIcon,
+  WeiboIcon,  
 } from '~/assets'
 import { Tooltip } from '~/components/ui/Tooltip'
 
@@ -23,6 +24,7 @@ type Platform =
   | 'youtube'
   | 'telegram'
   | 'bilibili'
+  | 'weibo'  
   | 'mail'
   | 'rss'
 type PlatformInfo = {
@@ -51,6 +53,11 @@ const iconMapper: { [key: string]: PlatformInfo } = {
     icon: BilibiliIcon,
     platform: 'bilibili',
     label: '哔哩哔哩',
+  },
+  '(?:weibo.com)': {
+    icon: WeiboIcon,
+    platform: 'weibo',
+    label: '微博',
   },
   '(?:mailto:)': { icon: MailIcon, platform: 'mail', label: '邮箱地址' },
   '(?:feed.xml)': { icon: AtomIcon, platform: 'rss', label: 'RSS 订阅' },

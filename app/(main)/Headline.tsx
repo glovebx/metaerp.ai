@@ -19,23 +19,27 @@ function Developer() {
 
 function Designer() {
   return (
-    <span className="group relative rounded-2xl bg-black/5 p-1 dark:bg-white/5">
-      <span className="pointer-events-none absolute inset-0 border border-lime-700/90 opacity-70 group-hover:border-dashed group-hover:opacity-100 dark:border-lime-400/90">
-        <span className="absolute -left-0.5 -top-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
-        <span className="absolute -bottom-0.5 -right-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
-        <span className="absolute -bottom-0.5 -left-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
-        <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
-      </span>
-      设计师
-    </span>
+    // <span className="group relative rounded-2xl bg-black/5 p-1 dark:bg-white/5">
+    //   <span className="pointer-events-none absolute inset-0 border border-lime-700/90 opacity-70 group-hover:border-dashed group-hover:opacity-100 dark:border-lime-400/90">
+    //     <span className="absolute -left-0.5 -top-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
+    //     <span className="absolute -bottom-0.5 -right-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
+    //     <span className="absolute -bottom-0.5 -left-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
+    //     <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
+    //   </span>
+    //   珠宝鉴定师
+    // </span>
+    <span className="group">
+      <SparkleIcon className="mr-1 inline-flex transform-gpu transition-transform duration-500 group-hover:rotate-180" />
+      <span>珠宝鉴定师</span>
+    </span>    
   )
 }
 
 function OCD() {
   return (
     <span className="group">
-      <SparkleIcon className="mr-1 inline-flex transform-gpu transition-transform duration-500 group-hover:rotate-180" />
-      <span>细节控</span>
+      {/* <SparkleIcon className="mr-1 inline-flex transform-gpu transition-transform duration-500 group-hover:rotate-180" /> */}
+      <span>严肃、活泼、认真</span>
     </span>
   )
 }
@@ -43,8 +47,8 @@ function OCD() {
 function Founder() {
   return (
     <span className="group">
-      <UserSecurityIcon className="mr-1 inline-flex group-hover:fill-zinc-600/20 dark:group-hover:fill-zinc-200/20" />
-      <span>创始人</span>
+      {/* <UserSecurityIcon className="mr-1 inline-flex group-hover:fill-zinc-600/20 dark:group-hover:fill-zinc-200/20" /> */}
+      <span>Stay Hungry，Stay Foolish</span>
     </span>
   )
 }
@@ -65,7 +69,9 @@ export function Headline() {
       >
         <Developer />，<Designer />，
         <br />
-        <OCD />，<Founder />
+        {/* <OCD />
+        <br /> */}
+        <Founder />
       </motion.h1>
       <motion.p
         className="mt-6 text-base text-zinc-600 dark:text-zinc-400"
@@ -80,10 +86,10 @@ export function Headline() {
         }}
       >
         <Balancer>
-          我是 Cali，
-          <PeekabooLink href="https://zolplay.cn">佐玩</PeekabooLink>
-          创始人，目前带领着佐玩致力于创造一个充满创造力的工作环境，同时鼓励团队创造影响世界的产品。
-          我热爱开发，设计，创新，享受生活，以及在未知领域中探索。
+          我是 Alex，
+          {/* <PeekabooLink href="https://zolplay.cn">佐玩</PeekabooLink> */}
+          独立开发者，珠宝鉴定师，目前合伙经营一家珠宝工作室。
+          编码不辍、勤学不倦，用输出对抗无力，以旺盛的好奇心驱动生活
         </Balancer>
       </motion.p>
       <motion.div
@@ -98,37 +104,37 @@ export function Headline() {
           delay: 0.25,
         }}
       >
-        <SocialLink
-          href="https://cali.so/twitter"
-          aria-label="我的推特"
-          platform="twitter"
-        />
-        <SocialLink
-          href="https://cali.so/youtube"
+        {/* <SocialLink
+          href="https://metaerp.ai/weibo"
+          aria-label="古鹿微博"
+          platform="weibo"
+        /> */}
+        {/* <SocialLink
+          href="https://metaerp.ai/youtube"
           aria-label="我的 YouTube"
           platform="youtube"
-        />
+        /> */}
         <SocialLink
-          href="https://cali.so/bilibili"
+          href="https://metaerp.ai/bilibili"
           aria-label="我的 Bilibili"
           platform="bilibili"
         />
         <SocialLink
-          href="https://cali.so/github"
+          href="https://metaerp.ai/github"
           aria-label="我的 GitHub"
           platform="github"
         />
-        <SocialLink
-          href="https://cali.so/tg"
+        {/* <SocialLink
+          href="https://metaerp.ai/tg"
           aria-label="我的 Telegram"
           platform="telegram"
-        />
+        /> */}
         <SocialLink href="/feed.xml" platform="rss" aria-label="RSS 订阅" />
-        <SocialLink
-          href="mailto:hi@cali.so"
+        {/* <SocialLink
+          href="mailto:hi@metaerp.ai"
           aria-label="我的邮箱"
           platform="mail"
-        />
+        /> */}
       </motion.div>
     </div>
   )

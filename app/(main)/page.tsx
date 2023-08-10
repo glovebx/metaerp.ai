@@ -14,8 +14,8 @@ export default function BlogHomePage() {
       <Container className="mt-10">
         <Headline />
       </Container>
-      <Photos />
-      <Container className="mt-24 md:mt-28">
+      {/* <Photos /> */}
+      <Container className="mt-12 md:mt-14">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-6 pt-6">
             <h2 className="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">

@@ -2,10 +2,9 @@ import Image, { type StaticImageData } from 'next/image'
 import React from 'react'
 
 import { BriefcaseIcon } from '~/assets'
-import eightNinthsLogo from '~/assets/company/8ninths.jpeg'
-import abletiveLogo from '~/assets/company/abletive.png'
-import vvsLogo from '~/assets/company/vvs.png'
-import zolplayLogo from '~/assets/company/zolplay.png'
+import japanLogo from '~/assets/company/japan.svg'
+import hangzhouLogo from '~/assets/company/hangzhou.svg'
+import guluartLogo from '~/assets/company/guluart.jpeg'
 
 type Resume = {
   company: string
@@ -16,36 +15,29 @@ type Resume = {
 }
 const resume: Resume[] = [
   {
-    company: '深圳市佐玩信息技术有限公司',
-    title: '创始人 CEO',
-    logo: zolplayLogo,
-    start: '2021',
+    company: '上海古鹿珠宝',
+    title: '合伙人',
+    logo: guluartLogo,
+    start: '2017',
     end: {
       label: '至今',
       dateTime: new Date().getFullYear(),
     },
   },
   {
-    company: 'very very spaceship',
-    title: '软件工程师',
-    logo: vvsLogo,
-    start: '2018',
-    end: '2020',
-  },
-  {
-    company: '8ninths Inc.',
-    title: 'AR & 全栈工程师',
-    logo: eightNinthsLogo,
-    start: '2017',
-    end: '2018',
-  },
-  {
-    company: 'Abletive',
-    title: '创始人',
-    logo: abletiveLogo,
-    start: '2014',
+    company: '杭州多家科技公司',
+    title: '全栈工程师/技术经理',
+    logo: hangzhouLogo,
+    start: '2009',
     end: '2016',
   },
+  {
+    company: '日本某株式会社',
+    title: '全栈工程师',
+    logo: japanLogo,
+    start: '2003',
+    end: '2008',
+  }
 ]
 
 function getRoleDate(date: Resume['start'] | Resume['end'], label = true) {
