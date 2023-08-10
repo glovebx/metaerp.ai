@@ -1,10 +1,10 @@
 export const seo = {
-  title: 'Cali Castle | 开发者、设计师、细节控、创始人',
+  title: 'Alex(aka 超级Odoo) | 开发者、珠宝鉴定师',
   description:
-    '我叫 Cali，一名开发者，设计师，细节控，同时也是佐玩创始人，目前带领着佐玩致力于创造一个充满创造力的工作环境，同时鼓励团队创造影响世界的产品。',
+    '我是Alex，独立开发者，珠宝鉴定师，目前合伙经营一家珠宝工作室。编码不辍、勤学不倦，用输出对抗无力，以旺盛的好奇心驱动生活',
   url: new URL(
     process.env.NODE_ENV === 'production'
-      ? 'https://cali.so'
+      ? 'https://metaerp.ai'
       : 'http://localhost:3000'
   ),
 } as const
