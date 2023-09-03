@@ -38,17 +38,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: {
       default: seo.title,
-      template: '%s | Cali Castle',
+      template: '%s | MetaERP AI',
     },
     description: seo.description,
-    siteName: 'Cali Castle',
+    siteName: 'MetaERP AI',
     locale: 'zh_CN',
     type: 'website',
-    url: 'https://cali.so',
+    url: 'https://metaerp.ai',
   },
   twitter: {
-    site: '@thecalicastle',
-    creator: '@thecalicastle',
+    site: '@superpotato',
+    creator: '@superpotato',
     card: 'summary_large_image',
     title: seo.title,
     description: seo.description,
