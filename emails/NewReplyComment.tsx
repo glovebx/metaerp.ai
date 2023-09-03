@@ -9,8 +9,8 @@ const NewReplyCommentEmail = ({
   postLink = 'https://metaerp.ai',
   postTitle = '测试文章 Lorem ipsum dolor sit amet, consectetur adipisicing elit',
   postImageUrl = 'https://metaerp.ai/api/og?title=测试文章',
-  userFirstName = 'Cali',
-  userLastName = 'Castle',
+  userFirstName = 'Metaerp',
+  userLastName = 'AI',
   userImageUrl = 'https://metaerp.ai/icon.png',
   commentContent = '*测试评论*\n- Wow wtf\n- Cool',
 }: {

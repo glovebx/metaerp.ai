@@ -39,7 +39,7 @@ export default function Layout({
                 src={`${emailConfig.baseUrl}/icon.png`}
                 width="24"
                 height="24"
-                alt="Cali"
+                alt="MetaERP"
                 className="mx-auto my-0"
               />
               <Text className="text-center">
@@ -47,7 +47,7 @@ export default function Layout({
                   href="https://metaerp.ai"
                   className="text-zinc-700 underline"
                 >
-                  <strong>Cali Castle</strong>
+                  <strong>MetaERP AI</strong>
                 </Link>
                 <br />
                 开发者、设计师、细节控、创始人
