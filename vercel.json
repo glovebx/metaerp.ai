@@ -1,4 +1,5 @@
 {
+  "installCommand": "pnpm install",
   "buildCommand": "pnpm turbo build",
   "github": {
     "silent": true
