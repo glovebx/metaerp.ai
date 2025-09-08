@@ -3,10 +3,12 @@
   "tasks": {
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["CLERK_SECRET_KEY", "DATABASE_URL", "RESEND_API_KEY", "SITE_NOTIFICATION_EMAIL_TO", "UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN", "EDGE_CONFIG", "ENABLE_EXPERIMENTAL_COREPACK"]       
     },
     "build": {
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": ["CLERK_SECRET_KEY", "DATABASE_URL", "RESEND_API_KEY", "SITE_NOTIFICATION_EMAIL_TO", "UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN", "EDGE_CONFIG", "ENABLE_EXPERIMENTAL_COREPACK"] 
     },
     "lint": {}
   }
