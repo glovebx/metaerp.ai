@@ -8,11 +8,11 @@ import { get } from '@vercel/edge-config'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  swcMinify: false,
+  // swcMinify: false,
   
-  experimental: {
-    serverActions: true,
-  },
+  // experimental: {
+  //   serverActions: true,
+  // },
 
   images: {
     remotePatterns: [
