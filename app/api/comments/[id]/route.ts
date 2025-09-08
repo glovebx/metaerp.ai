@@ -1,4 +1,4 @@
-import { clerkClient, currentUser } from '@clerk/nextjs'
+import { clerkClient,currentUser } from '@clerk/nextjs/server'
 import { Ratelimit } from '@upstash/ratelimit'
 import { asc, eq } from 'drizzle-orm'
 import { type NextRequest, NextResponse } from 'next/server'
@@ -15,6 +15,7 @@ import { comments } from '~/db/schema'
 import NewReplyCommentEmail from '~/emails/NewReplyComment'
 import { env } from '~/env.mjs'
 import { url } from '~/lib'
+import { getIP } from '~/lib/ip';
 import { resend } from '~/lib/mail'
 import { redis } from '~/lib/redis'
 import { client } from '~/sanity/lib/client'
@@ -29,13 +30,15 @@ function getKey(id: string) {
   return `comments:${id}`
 }
 
-type Params = { params: { id: string } }
+type Params = { params: Promise<{ id: string }> }
 export async function GET(req: NextRequest, { params }: Params) {
   try {
-    const postId = params.id
+    const { id } = await params;
+    const postId = id
 
+    const ip = getIP(req)
     const { success } = await ratelimit.limit(
-      getKey(postId) + `_${req.ip ?? ''}`
+      getKey(postId) + `_${ip ?? ''}`
     )
     if (!success) {
       return new Response('Too Many Requests', {
@@ -80,14 +83,26 @@ const CreateCommentSchema = z.object({
 })
 
 export async function POST(req: NextRequest, { params }: Params) {
+  // // Get the userId from auth() -- if null, the user is not signed in
+  // const { userId } = await auth()
+  // if (!userId) {
+  //   return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
+  // }
+
+  // Get the Backend API User object when you need access to the user's information
   const user = await currentUser()
+
+  // Use getAuth() to get the user's ID
   if (!user) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
   }
 
-  const postId = params.id
+  const { id } = await params;
+  const postId = id
 
-  const { success } = await ratelimit.limit(getKey(postId) + `_${req.ip ?? ''}`)
+  const ip = getIP(req)  
+
+  const { success } = await ratelimit.limit(getKey(postId) + `_${ip ?? ''}`)
   if (!success) {
     return new Response('Too Many Requests', {
       status: 429,
@@ -124,6 +139,9 @@ export async function POST(req: NextRequest, { params }: Params) {
     }
 
     if (parentId && env.NODE_ENV === 'production') {
+      // Initialize the Backend SDK
+      const client = await clerkClient()
+
       const [parentUserFromDb] = await db
         .select({
           userId: comments.userId,
@@ -134,15 +152,16 @@ export async function POST(req: NextRequest, { params }: Params) {
         const {
           primaryEmailAddressId,
           emailAddresses,
-          imageUrl,
-          firstName,
-          lastName,
-        } = await clerkClient.users.getUser(parentUserFromDb.userId)
+          // imageUrl,
+          // firstName,
+          // lastName,
+        } = await client.users.getUser(parentUserFromDb.userId)
+
         const primaryEmailAddress = emailAddresses.find(
           (emailAddress) => emailAddress.id === primaryEmailAddressId
         )
         if (primaryEmailAddress) {
-          await resend.sendEmail({
+          await resend.emails.send({
             from: emailConfig.from,
             to: primaryEmailAddress.emailAddress,
             subject: '👋 有人回复了你的评论',

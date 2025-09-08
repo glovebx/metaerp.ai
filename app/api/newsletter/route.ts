@@ -9,6 +9,7 @@ import { subscribers } from '~/db/schema'
 import ConfirmSubscriptionEmail from '~/emails/ConfirmSubscription'
 import { env } from '~/env.mjs'
 import { url } from '~/lib'
+import { getIP } from '~/lib/ip'
 import { resend } from '~/lib/mail'
 import { redis } from '~/lib/redis'
 
@@ -24,7 +25,8 @@ const ratelimit = new Ratelimit({
 
 export async function POST(req: NextRequest) {
   if (env.NODE_ENV === 'production') {
-    const { success } = await ratelimit.limit('subscribe_' + (req.ip ?? ''))
+    const ip = getIP(req)
+    const { success } = await ratelimit.limit('subscribe_' + ip)
     if (!success) {
       return NextResponse.error()
     }
@@ -47,7 +49,7 @@ export async function POST(req: NextRequest) {
     const token = crypto.randomUUID()
 
     if (env.NODE_ENV === 'production') {
-      await resend.sendEmail({
+      await resend.emails.send({
         from: emailConfig.from,
         to: parsed.email,
         subject: '来自 MetaERP 的订阅确认',

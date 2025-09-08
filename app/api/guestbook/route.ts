@@ -1,4 +1,4 @@
-import { currentUser } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs/server'
 import { type NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
@@ -19,7 +19,9 @@ function getKey(id?: string) {
 
 export async function GET(req: NextRequest) {
   try {
-    const { success } = await ratelimit.limit(getKey(req.ip ?? ''))
+    const ips = (req.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')
+    const ip = ips[0]?.trim() ?? '';
+    const { success } = await ratelimit.limit(getKey(ip))
     if (!success) {
       return new Response('Too Many Requests', {
         status: 429,
@@ -64,7 +66,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (env.NODE_ENV === 'production' && env.SITE_NOTIFICATION_EMAIL_TO) {
-      await resend.sendEmail({
+      await resend.emails.send({
         from: emailConfig.from,
         to: env.SITE_NOTIFICATION_EMAIL_TO,
         subject: '👋 有人刚刚在留言墙留言了',

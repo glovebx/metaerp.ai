@@ -8,7 +8,6 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
 import React from 'react'
 import { useMutation } from 'react-query'
 import TextareaAutosize from 'react-textarea-autosize'
@@ -41,7 +40,6 @@ import {
   type CommentDto,
   type PostIDLessCommentDto,
 } from '~/db/dto/comment.dto'
-import { url } from '~/lib'
 import { parseDisplayName } from '~/lib/string'
 
 dayjs.extend(relativeTime)
@@ -54,7 +52,6 @@ type CommentableProps = {
 }
 
 function Root({ className, blockId }: CommentableProps) {
-  const pathname = usePathname()
   const { postId, comments, currentBlockId } = useSnapshot(blogPostState)
   const { user: me } = useUser()
   const [isCommenting, setIsCommenting] = React.useState(false)
@@ -292,7 +289,6 @@ function Root({ className, blockId }: CommentableProps) {
                       <div className="flex justify-center">
                         <SignInButton
                           mode="modal"
-                          redirectUrl={url(pathname).href}
                         >
                           <Button type="button">
                             <UserArrowLeftIcon className="mr-1 h-5 w-5" />

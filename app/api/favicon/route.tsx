@@ -1,6 +1,8 @@
 import * as cheerio from 'cheerio'
-import { ImageResponse, type NextRequest, NextResponse } from 'next/server'
+import { ImageResponse } from 'next/og'
+import { type NextRequest, NextResponse } from 'next/server'
 
+import { getIP } from '~/lib/ip'
 import { ratelimit, redis } from '~/lib/redis'
 
 export const runtime = 'edge'
@@ -25,7 +27,6 @@ function getPredefinedIconForUrl(url: string): string | undefined {
       `^(?:https?:\/\/)?(?:[^@/\\n]+@)?(?:www.)?` + regexStr
     )
     if (regex.test(url)) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return faviconMapper[regexStr]!
     }
   }
@@ -56,7 +57,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.error()
   }
 
-  const { success } = await ratelimit.limit('favicon' + `_${req.ip ?? ''}`)
+  const ip = getIP(req)
+
+  const { success } = await ratelimit.limit('favicon' + `_${ip}`)
   if (!success) {
     return NextResponse.error()
   }

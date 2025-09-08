@@ -8,12 +8,9 @@ import { url } from '~/lib'
 import { redis } from '~/lib/redis'
 import { getBlogPost } from '~/sanity/queries'
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: { slug: string }
-}) => {
-  const post = await getBlogPost(params.slug)
+export const generateMetadata = async (props: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await props.params;
+  const post = await getBlogPost(slug)
   if (!post) {
     notFound()
   }
@@ -48,12 +45,9 @@ export const generateMetadata = async ({
   } satisfies Metadata
 }
 
-export default async function BlogPage({
-  params,
-}: {
-  params: { slug: string }
-}) {
-  const post = await getBlogPost(params.slug)
+export default async function BlogPage(props: { params: Promise<{ slug: string }> }) {
+  const { slug } = await props.params;
+  const post = await getBlogPost(slug)
   if (!post) {
     notFound()
   }

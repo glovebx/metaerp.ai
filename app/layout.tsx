@@ -7,7 +7,7 @@ import { type Metadata } from 'next'
 
 import { ThemeProvider } from '~/app/(main)/ThemeProvider'
 import { url } from '~/lib'
-import { zhCN } from '~/lib/clerkLocalizations'
+// import { zhCN } from '~/lib/clerkLocalizations'
 import { sansFont } from '~/lib/font'
 import { seo } from '~/lib/seo'
 
@@ -19,10 +19,6 @@ export const metadata: Metadata = {
   },
   description: seo.description,
   keywords: 'MetaERP,MetaERP AI,古鹿,珠宝,创始人,CTO,开发者,设计师,细节',
-  themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#000212' },
-    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
-  ],
   manifest: '/site.webmanifest',
   robots: {
     index: true,
@@ -61,13 +57,20 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#000212' },
+    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
+  ]
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider localization={zhCN}>
+    <ClerkProvider>
       <html
         lang="zh-CN"
         className={`${sansFont.variable} m-0 h-full p-0 font-sans antialiased`}

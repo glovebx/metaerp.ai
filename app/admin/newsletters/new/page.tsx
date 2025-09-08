@@ -39,11 +39,11 @@ export default function CreateNewsletterPage() {
         .map((sub) => sub.email!),
     ])
 
-    await resend.sendEmail({
+    await resend.emails.send({
       subject: data.subject,
       from: emailConfig.from,
       to: '1069010@qq.com',
-      reply_to: emailConfig.from,
+      replyTo: emailConfig.from,
       bcc: Array.from(subscriberEmails),
       react: NewslettersTemplate({
         subject: data.subject,

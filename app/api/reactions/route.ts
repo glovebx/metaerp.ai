@@ -2,6 +2,7 @@ import { Ratelimit } from '@upstash/ratelimit'
 import { revalidateTag } from 'next/cache'
 import { type NextRequest, NextResponse } from 'next/server'
 
+import { getIP } from '~/lib/ip'
 import { redis } from '~/lib/redis'
 
 export const runtime = 'edge'
@@ -26,7 +27,8 @@ export async function GET(req: NextRequest) {
     await redis.set(getKey(id), [0, 0, 0, 0])
   }
 
-  const { success } = await ratelimit.limit(getKey(id) + `_${req.ip ?? ''}`)
+  const ip = getIP(req)
+  const { success } = await ratelimit.limit(getKey(id) + `_${ip}`)
   if (!success) {
     return new Response('Too Many Requests', {
       status: 429,
@@ -40,13 +42,15 @@ export async function PATCH(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const id = searchParams.get('id')
   const index = searchParams.get('index')
-  if (!id || !index || !(parseInt(index) >= 0 && parseInt(index) < 4)) {
+  const intIndex = parseInt(index ?? '-1')
+  if (!id || !index || !(intIndex >= 0 && intIndex < 4)) {
     return new Response('Missing id or index', { status: 400 })
   }
 
   const key = getKey(id)
 
-  const { success } = await ratelimit.limit(key + `_${req.ip ?? ''}`)
+  const ip = getIP(req)
+  const { success } = await ratelimit.limit(key + `_${ip}`)
   if (!success) {
     return new Response('Too Many Requests', {
       status: 429,
@@ -57,8 +61,9 @@ export async function PATCH(req: NextRequest) {
   if (!current) {
     current = [0, 0, 0, 0]
   }
+  
   // increment the array value at the index
-  current[parseInt(index)] += 1
+  current[intIndex] = (current[intIndex] || 0) + 1
 
   await redis.set(key, current)
 

@@ -8,12 +8,27 @@ import { get } from '@vercel/edge-config'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  swcMinify: false,
+  
   experimental: {
     serverActions: true,
   },
 
   images: {
-    domains: ['cdn.sanity.io'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        port: '',
+        pathname: '**',
+      },      
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        port: '',
+        pathname: '**',
+      },
+    ],     
   },
 
   async redirects() {

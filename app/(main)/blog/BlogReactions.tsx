@@ -44,6 +44,11 @@ export function BlogReactions({
       // Optimistic update
       setCachedReactions((prev) => {
         const next = [...prev]
+        // Check if the value at the index is undefined.
+        // If so, default to 0 before incrementing.
+        if (next[index] === undefined) {
+          next[index] = 0;
+        }
         next[index]++
         return next
       })

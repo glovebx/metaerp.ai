@@ -102,6 +102,39 @@ Card.Cta = function CardCta({ children }: { children: React.ReactNode }) {
   )
 }
 
+// Card.Eyebrow = function CardEyebrow({
+//   as: Component = 'p',
+//   decorate = false,
+//   className,
+//   children,
+//   ...props
+// }: {
+//   as?: keyof JSX.IntrinsicElements
+//   decorate?: boolean
+//   className?: string
+//   children: React.ReactNode
+// } & React.HTMLAttributes<unknown>) {
+//   return (
+//     <Component
+//       className={clsxm(
+//         className,
+//         'relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500',
+//         decorate && 'pl-3.5'
+//       )}
+//       {...props}
+//     >
+//       {decorate && (
+//         <span
+//           className="absolute inset-y-0 left-0 flex items-center"
+//           aria-hidden="true"
+//         >
+//           <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500" />
+//         </span>
+//       )}
+//       {children}
+//     </Component>
+//   )
+// }
 Card.Eyebrow = function CardEyebrow({
   as: Component = 'p',
   decorate = false,
@@ -109,25 +142,23 @@ Card.Eyebrow = function CardEyebrow({
   children,
   ...props
 }: {
-  as?: keyof JSX.IntrinsicElements
+  as?: React.ElementType
   decorate?: boolean
   className?: string
-  children: React.ReactNode
-} & React.HTMLAttributes<unknown>) {
+} & React.ComponentProps<'p'>) {
   return (
+
     <Component
       className={clsxm(
         className,
         'relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500',
         decorate && 'pl-3.5'
       )}
-      {...props}
-    >
+      {...props}>
       {decorate && (
         <span
           className="absolute inset-y-0 left-0 flex items-center"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
           <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500" />
         </span>
       )}

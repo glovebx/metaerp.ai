@@ -6,10 +6,15 @@ export default function Email() {
   return (
     <Html>
       <Button
-        pX={20}
-        pY={12}
+          style={{
+            paddingLeft: 20,
+            paddingRight: 20,
+            paddingTop: 12,
+            paddingBottom: 12,
+            background: '#000', 
+            color: '#fff'
+          }}    
         href="https://example.com"
-        style={{ background: '#000', color: '#fff' }}
       >
         Click me
       </Button>
